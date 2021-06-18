@@ -27,14 +27,14 @@
 
 
 
-object: {
-level: 3//default value
+`object: {`
+`level: 3//default value`
 
-​	name: 'area', //default: '',  input name attribute
+​	`name: 'area', //default: '',  input name attribute`
 
-​	value: '440783', //default: '',  input value attrubute
+​	`value: '440783', //default: '',  input value attrubute`
 
-}
+`}`
 
 
 
