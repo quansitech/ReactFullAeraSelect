@@ -1,0 +1,2 @@
+import ReactFullAreaSelect from './fullAreaSelect';
+

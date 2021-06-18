@@ -1,0 +1,42 @@
+{
+  "name": "@quansitech/react_custom_form",
+  "author": "viki",
+  "version": "v1.2.0",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "files": [
+    "lib/*.js",
+    "es/*.js"
+  ],
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.0.1",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.6.3",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-import": "^1.13.0",
+    "babel-polyfill": "^6.26.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.2.0",
+    "html-webpack-plugin": "^3.2.0",
+    "style-loader": "^1.0.0",
+    "svg-inline-loader": "^0.8.2",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.9.0",
+    "webpack-merge": "^4.2.2"
+  },
+  "scripts": {
+    "start": "webpack-dev-server --open --config webpack.dev.conf.js",
+    "build": "webpack --config webpack.prod.conf.js",
+    "babel": "npx babel src --out-dir lib --ignore \"src/app.js\" --config-file ./babel.config.json",
+    "babel-es": "npx babel src --out-dir es --ignore \"src/app.js\" --config-file ./babel.es.config.json"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "less-loader": "^6.1.0",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0"
+  }
+}
