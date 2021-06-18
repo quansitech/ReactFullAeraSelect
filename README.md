@@ -28,11 +28,12 @@
 
 
 `object: {`
-`level: 3//default value`
-
-​	`name: 'area', //default: '',  input name attribute`
-
-​	`value: '440783', //default: '',  input value attrubute`
+      
+    level: 3//default value
+    
+    name: 'area', //default: '',  input name attribute
+    
+    value: '440783', //default: '',  input value attrubute
 
 `}`
 
