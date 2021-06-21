@@ -11,20 +11,6 @@
 
 初始化方法共两种:
 
-```javascript
-options: {
-  level: 3//default value
-  name: 'area', //default: '',  input name attribute
-  value: '440783', //default: '',  input value attrubute,
-  urlConfig: { //default: {}, cover default api url.
-    getProvince: '/api/area/getProvince', //default: '/api/area/getProvince.html',
-    getCity: '/api/area/getCityByProvince',
-    getDistrict: '/api/area/getDistrictByCity',
-    getStreet: '/api/area/getStreetByDistrict',
-  }
-}
-```
-
 - js配置初始化
 
   - ```
@@ -45,7 +31,20 @@ options: {
   <div data-react-full-area-select data-name="area" data-level="4" data-value="440783"></div>
   ```
 
-
+options配置如下
+```javascript
+options: {
+  level: 3//default value
+  name: 'area', //default: '',  input name attribute
+  value: '440783', //default: '',  input value attrubute,
+  urlConfig: { //default: {}, cover default api url.
+    getProvince: '/api/area/getProvince', //default: '/api/area/getProvince.html',
+    getCity: '/api/area/getCityByProvince',
+    getDistrict: '/api/area/getDistrictByCity',
+    getStreet: '/api/area/getStreetByDistrict',
+  }
+}
+```
 
 
 
