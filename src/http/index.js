@@ -1,21 +1,24 @@
-import service from "./service";
 import axios from 'axios';
 
-const http = {};
-
-for(let i in service){
-	const item = service[i];
-	http[i] = ((params)=>{
-		return axios.get(`${item.url}`, {
-				params
-			})
-			.then(function (response) {
-				return response.data;
-			})
-			.catch(function (error) {
-				console.log(error);
-			});
-	});
+function initHttp(url){
+	return (params)=>{
+		return axios.get(url, {
+			params
+		})
+		.then(function (response) {
+			return response.data;
+		})
+		.catch(function (error) {
+			console.log(error);
+		})
+	};
 }
 
-export default http;
+export default (httpConfigObj)=>{
+	let resObj = {};
+	for(let key in httpConfigObj){
+		const item = httpConfigObj[key];
+		resObj[key] = initHttp(item.url);
+	}
+	return resObj;
+};

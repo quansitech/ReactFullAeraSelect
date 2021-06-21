@@ -1,12 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import http from '../http';
+import initService from '../http';
+import defaultService from "../http/service";
 import Util from "../Util";
 
 function FullAreaSelect(props) {
-	let {level, value = ''} = props;
+	let {level, value = '', urlConfig = {}} = props;
 	value = String(value);
 	const MAX_LEVEL = 4;
 	level = Math.min(level, MAX_LEVEL);
+	let http = null;
 	
 	const LEVEL_ENUM = {
 		province: 1,
@@ -87,6 +89,20 @@ function FullAreaSelect(props) {
 		cityData,
 	]);
 	
+	useEffect(() => {
+		initUrl();
+	});
+	
+	function initUrl(){
+		const URL_CONFIG_COPY = {...urlConfig};
+		for(let key in URL_CONFIG_COPY){
+			URL_CONFIG_COPY[key] = {
+				url: URL_CONFIG_COPY[key],
+			}
+		}
+		const NEW_URL_CONFIG = Object.assign({}, defaultService, URL_CONFIG_COPY);
+		http = initService(NEW_URL_CONFIG);
+	}
 	
 	function initDefaultConf(defaultConf) {
 		let newAllData = {};
@@ -195,6 +211,7 @@ function FullAreaSelect(props) {
 			};
 		}
 		
+		console.log('http', http);
 		return http[`get${Util.upperCaseFirstLetter(name)}`](params)
 			.then((data) => {
 				if(data){
