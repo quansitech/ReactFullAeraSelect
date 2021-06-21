@@ -10,12 +10,14 @@
 
   - ```javascript
     ReactFullAreaSelect(id: String[, options: Object])
-    id: div id //注意,是 div id
+    id: INPUT_HIDDEN_ELEMENT_ID 
     ```
 
 - 与jquery一起食用:
 
-  ​	`$(INPUT_HIDDEN_ELEMENT).reactFullAreaSelect(options)`
+```javascript
+    $(INPUT_HIDDEN_ELEMENT).reactFullAreaSelect(options)
+```
 
 
 
@@ -26,16 +28,13 @@
   ```
 
 
-
-`object: {`
-      
+```javascript
+options: {
     level: 3//default value
-    
     name: 'area', //default: '',  input name attribute
-    
     value: '440783', //default: '',  input value attrubute
-
-`}`
+}
+```
 
 
 
