@@ -39,6 +39,7 @@ options: {
 ```
 
 - html配置自动初始化
+  不支持修改 urlConfig 属性
 
   ```html
   <div data-react-full-area-select data-name="area" data-level="4" data-value="440783"></div>
