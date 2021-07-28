@@ -66,7 +66,7 @@ function FullAreaSelect(props) {
 		districtData,
 		streetData,
 	]);
-	
+
 	useEffect(() => {
 		updateDataByLevel(districtData.level, {
 			data: [],
@@ -173,7 +173,6 @@ function FullAreaSelect(props) {
 				value: cityData.districtValue,
 			});
 		}
-		return handleCityValue;
 	}
 	
 	function initDefaultSelectValue(level) {
@@ -202,7 +201,7 @@ function FullAreaSelect(props) {
 		initDefaultSelectValue(level);
 	}, []);
 	
-	function getData(name, value = '') {
+	function getData(name, value = '', isReset = false) {
 		const {reqKey, level} = allDataObj[name];
 		let params = {};
 		if (reqKey) {
@@ -214,9 +213,13 @@ function FullAreaSelect(props) {
 		return http[`get${Util.upperCaseFirstLetter(name)}`](params)
 			.then((data) => {
 				if(data){
-					updateDataByLevel(level, {
+					const NEW_DATA = {
 						data,
-					});
+					};
+					if(isReset){
+						NEW_DATA.value = '';
+					}
+					updateDataByLevel(level, NEW_DATA);
 					return data;
 				}else{
 					return Promise.reject(false);
@@ -266,7 +269,7 @@ function FullAreaSelect(props) {
 			value: '',
 			data: [],
 		});
-		getData(nextItem.name, prevValue);
+		getData(nextItem.name, prevValue, true);
 	}
 	
 	
@@ -294,7 +297,7 @@ function FullAreaSelect(props) {
 				</select> : <></>}
 			</React.Fragment>
 		})}
-		<input type="text" value={addrVal} name={props.name || ''} />
+		<input type="hidden" value={addrVal} name={props.name || ''} />
 	</React.Fragment>;
 }
 
