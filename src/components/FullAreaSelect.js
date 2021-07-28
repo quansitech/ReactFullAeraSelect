@@ -203,7 +203,7 @@ function FullAreaSelect(props) {
 	}, []);
 	
 	function getData(name, value = '') {
-		const {reqKey, level, isLast} = allDataObj[name];
+		const {reqKey, level} = allDataObj[name];
 		let params = {};
 		if (reqKey) {
 			params = {
@@ -211,13 +211,11 @@ function FullAreaSelect(props) {
 			};
 		}
 		
-		console.log('http', http);
 		return http[`get${Util.upperCaseFirstLetter(name)}`](params)
 			.then((data) => {
 				if(data){
 					updateDataByLevel(level, {
 						data,
-						// value: '',
 					});
 					return data;
 				}else{
@@ -296,7 +294,7 @@ function FullAreaSelect(props) {
 				</select> : <></>}
 			</React.Fragment>
 		})}
-		<input type="hidden" value={addrVal} name={props.name || ''} />
+		<input type="text" value={addrVal} name={props.name || ''} />
 	</React.Fragment>;
 }
 
