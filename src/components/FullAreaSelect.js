@@ -276,25 +276,27 @@ function FullAreaSelect(props) {
 	return <React.Fragment>
 		{allDataArr.map((item, index) => {
 			return <React.Fragment key={index}>
-				{item.show ? <select key={index}
-				                     name={item.name}
-				                     value={item.value}
-				                     data-level={item.level}
-				                     data-init-value={item.initValue}
-				                     className={`react-select-addr react-select-addr-${item.name} ${props.selectClassName || ''}`}
-				                     disabled={!item.data}
-				                     onChange={(e)=>handleChange(e, item)}>
-					<option value={''}>
-						{item.defaultText}
-					</option>
-					{item.data.map((data, dataIndex) => {
-						return <option
-							key={data.id}
-							value={data.id}>
-							{data.cname}
-						</option>;
-					})}
-				</select> : <></>}
+				{item.show ? <div className={`react-select-addr-box`}>
+						<select key={index}
+										 name={item.name}
+										 value={item.value}
+										 data-level={item.level}
+										 data-init-value={item.initValue}
+										 className={`react-select-addr react-select-addr-${item.name} ${props.selectClassName || ''}`}
+										 disabled={!item.data}
+										 onChange={(e)=>handleChange(e, item)}>
+						<option value={''}>
+							{item.defaultText}
+						</option>
+						{item.data.map((data, dataIndex) => {
+							return <option
+								key={data.id}
+								value={data.id}>
+								{data.cname}
+							</option>;
+						})}
+					</select>
+				</div> : <></>}
 			</React.Fragment>
 		})}
 		<input type="hidden" value={addrVal} name={props.name || ''} />

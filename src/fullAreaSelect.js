@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import './styles/style.less';
+
 import FullAreaSelect from './components/FullAreaSelect';
 
 
@@ -11,7 +13,7 @@ function ReactFullAreaSelect(id, opt){
     const PARENT_ELEMENT = el.parentElement;
 
     const WRAPPER_DOM  = document.createElement( 'div');
-    WRAPPER_DOM.className = 'area-select';
+    WRAPPER_DOM.className = `area-select area-select-${options.level}`;
     WRAPPER_DOM.appendChild(el);
 
     PARENT_ELEMENT.appendChild(WRAPPER_DOM);

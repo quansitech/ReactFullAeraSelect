@@ -1,8 +1,17 @@
 import ReactFullAreaSelect from './fullAreaSelect';
 
 
+function fontRem() {
+	var designW = 720;
+	var html = document.getElementsByTagName('html')[0];
+	var winW = Math.min(html.offsetWidth, 414);
+	html.style.fontSize = (winW / designW) * 100 + 'px';
+}
+fontRem();
+window.onresize = fontRem;
+
 ReactFullAreaSelect('test', {
-	level: 4,
+	level: 3,
 	value: '441900107000',
 	urlConfig: {
 		getProvince: '/api/area/getProvince',
