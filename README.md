@@ -6,6 +6,7 @@
 ### 使用 :
 
 ```html
+<link href="dist/react-full-area-select.css" rel="stylesheet">
 <script src="dist/index.js"></script>
 ```
 
