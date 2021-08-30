@@ -21,27 +21,27 @@ function FullAreaSelect(props) {
 		province: {
 			defaultText: '请选择省',
 			data: [],
-			value: getValueByLevel(value, LEVEL_ENUM.province),
+			value: getFillZeroValueByLevel(value, LEVEL_ENUM.province),
 			level: LEVEL_ENUM.province,
 		},
 		city: {
 			defaultText: '请选择市',
 			data: [],
 			level: LEVEL_ENUM.city,
-			value: getValueByLevel(value, LEVEL_ENUM.city),
+			value: getFillZeroValueByLevel(value, LEVEL_ENUM.city),
 			reqKey: 'province_id',
 		},
 		district: {
 			defaultText: '请选择县/市/区',
 			data: [],
-			value: getValueByLevel(value, LEVEL_ENUM.district),
+			value: getFillZeroValueByLevel(value, LEVEL_ENUM.district),
 			level: LEVEL_ENUM.district,
 			reqKey: 'city_id',
 		},
 		street: {
 			defaultText: '请选择镇/街道',
 			data: [],
-			value: getValueByLevel(value, LEVEL_ENUM.street),
+			value: getFillZeroValueByLevel(value, LEVEL_ENUM.street),
 			level: LEVEL_ENUM.street,
 			reqKey: 'district_id',
 			isLast: true,
@@ -54,7 +54,7 @@ function FullAreaSelect(props) {
 	let [streetData, setStreetData] = useState(DEFAULT_CONF.street);
 	
 	let [allDataArr, setAllDataArr] = useState(getNewAllDataArr());
-	let [allDataObj, setAllDataObj] = useState(getNewAllDataObj())
+	let [allDataObj, setAllDataObj] = useState(getNewAllDataObj());
 	
 	let [addrVal, setAddrVal] = useState(value);
 	
@@ -114,7 +114,7 @@ function FullAreaSelect(props) {
 				name: i,
 				show: CAN_INCLUDE,
 				initValue: value,
-				districtValue: getValueByLevel(value, LEVEL_ENUM.district),
+				districtValue: getFillZeroValueByLevel(value, LEVEL_ENUM.district),
 				isLast: item.isLast || (level < item.level),
 			};
 		}
@@ -145,7 +145,7 @@ function FullAreaSelect(props) {
 	}
 	
 	
-	function getValueByLevel(value, level){
+	function getFillZeroValueByLevel(value, level){
 		let res = '';
 		const MAX_VALUE_LENGTH = 12;
 		const DISTRICT_VALUE_LENGTH = 6;
@@ -250,14 +250,29 @@ function FullAreaSelect(props) {
 				break;
 		}
 	}
-	
+
+	function getValueByItem(level){
+		var resultArr = allDataArr.filter((item)=>{
+			return item.level === level;
+		});
+		return resultArr[0] && resultArr[0].value;
+	}
 	
 	function handleChange(e, data) {
-		const value = e.target.value;
+		const ORIGIN_VALUE = e.target.value;
+		var value = ORIGIN_VALUE;
+		const SHOULD_FILL_PREV_VALUE = !value && data.level > 1;
+		if(SHOULD_FILL_PREV_VALUE){
+			const PREV_LEVEL_VALUE = getValueByItem(data.level - 1);
+			value = PREV_LEVEL_VALUE;
+		}
 		updateDataByLevel(data.level, {
 			value,
 		});
 		setAddrVal(value);
+		if(!ORIGIN_VALUE){
+			return false;
+		}
 		if(!data.isLast){
 			const NEXT_ITEM = allDataArr[data.level];
 			getNextData(NEXT_ITEM, value);
