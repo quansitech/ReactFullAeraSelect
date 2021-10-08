@@ -259,8 +259,7 @@ function FullAreaSelect(props) {
 	}
 	
 	function handleChange(e, data) {
-		const ORIGIN_VALUE = e.target.value;
-		var value = ORIGIN_VALUE;
+		let value = e.target.value;
 		const SHOULD_FILL_PREV_VALUE = !value && data.level > 1;
 		if(SHOULD_FILL_PREV_VALUE){
 			const PREV_LEVEL_VALUE = getValueByItem(data.level - 1);
@@ -270,9 +269,6 @@ function FullAreaSelect(props) {
 			value,
 		});
 		setAddrVal(value);
-		if(!ORIGIN_VALUE){
-			return false;
-		}
 		if(!data.isLast){
 			const NEXT_ITEM = allDataArr[data.level];
 			getNextData(NEXT_ITEM, value);
@@ -284,7 +280,9 @@ function FullAreaSelect(props) {
 			value: '',
 			data: [],
 		});
-		getData(nextItem.name, prevValue, true);
+		if(prevValue){
+			getData(nextItem.name, prevValue, true);
+		}
 	}
 	
 	

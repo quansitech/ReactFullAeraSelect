@@ -12,7 +12,7 @@ window.onresize = fontRem;
 
 ReactFullAreaSelect('test', {
 	level: 3,
-	value: '441900107000',
+	value: '440783',
 	urlConfig: {
 		getProvince: '/api/area/getProvince',
 		getCity: '/api/area/getCityByProvince',
